@@ -1,0 +1,30 @@
+#!/bin/bash
+pacman -S yay pacman-contrib reflector
+
+# PAC_MANS=( "yay" "paru" "pikkaur" )
+PM="yay"
+
+# for MAN in "${PAC_MANS}"; do
+#     if ! command -v "${MAN}"; then
+#         continue
+#     else
+#         echo "${MAN} detected..."
+#         PAC_MAN="$MAN"
+#     fi
+# done
+
+# $MAN -Syyuu
+reflector --latest 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
+
+# systemctl enable now reflector.service # run reflector on boot
+systemctl enable reflector.timer # set timer for run reflector
+
+cp /etc/pacman.conf /etc/pacman.conf.bak
+cp /etc/pacman.conf /etc/pacman.conf.temp
+sed 's/#Color/Color\nILoveCandy/' < /etc/pacman.conf.temp \
+    | sed 's/#VerbosePkgLists/VerbosePkgLists/' \
+    | sed 's/#ParallelDownloads.*/ParalleDownloads = 10/g' > /etc/pacman.conf;
+rm -fr /etc/pacman.conf.temp
+
+$PM -Syyuu
+systemctl reboot
