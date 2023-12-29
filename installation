@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# PAC_MANS=( "yay" "paru" "pikkaur" )
+PM="yay"
+
+# for MAN in "${PAC_MANS}"; do
+#     if ! command -v "${MAN}"; then
+#         continue
+#     else
+#         echo "${MAN} detected..."
+#         PAC_MAN="$MAN"
+#     fi
+# done
+
+# Default and optinal programs 
+$PM -S wmenu foot polkit sddm
+
+$PM -S sway swaymsg swaybg swaylock swayidle swaync swayimg wl-clipboard #waybar
+# swaylock-effects swayfx swaytools swaystatus sway-contrib-git sway-input-config swaynagmode 
+
+$PM -S wl-clipboard-history wdisplays kanshi wlsunset wob waypipe flameshot
+
+usermod -G seat
+systemctl enable seatd.service
+systemctl enable sddm.service
+
+systemctl reboot
