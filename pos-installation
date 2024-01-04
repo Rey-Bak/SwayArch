@@ -10,7 +10,7 @@ else
 fi
 
 # Compressors
-$PM -S unzip zip tar unrar p7zip p7zip-plugins rsync
+$PM -S unarchiver rsync # gzip unzip zip tar unrar rar p7zip p7zip-plugins rsync
 
 # Codecs
 $PM -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 \
@@ -25,8 +25,10 @@ $PM -S ttf-dejavu gnu-free-fonts ttf-liberation noto-fonts ttf-roboto \
     ttf-iosevka-term otf-font-awesome
 
 # System
-$PM -S linux-firmware pipewire pipewire-alsa pipewire-jack pipewire-audio 
-#noise-suppression-for-voice
+$PM -S linux-firmware alsa-utils alsa-plugins pipewire pipewire-alsa \
+     pipewire-audio bluez bluez-utils libinput-config
+# pipewire-jack pipeware-pulse
+#noise-suppression-for-voice blueman
 
 # Apps
 $PM -S powertop cups ufw obsidian fastfetch flameshot tmux neovim starship \
@@ -36,3 +38,6 @@ $PM -S powertop cups ufw obsidian fastfetch flameshot tmux neovim starship \
 powertop --auto-tune
 systemctl enable cups.service
 systemctl enable ufw.service
+systemctl enable bluetooth.service
+
+systemctl reboot
