@@ -1,8 +1,14 @@
 #!/bin/bash
-pacman -S yay pacman-contrib reflector
+pacman -S pacman-contrib reflector 
+
+pacman -S --needed base-devel git
+mkdir "$HOME/{Repos,Downloads}"
+git clone https://aur.archlinux.org/yay.git "$HOME/Repos"
+cd "$HOME/Repos/yay" || exit 1
+makepkg -si
 
 # PAC_MANS=( "yay" "paru" "pikkaur" )
-PM="yay"
+PM=yay
 
 # for MAN in "${PAC_MANS}"; do
 #     if ! command -v "${MAN}"; then
@@ -17,7 +23,8 @@ PM="yay"
 reflector --latest 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
 
 # systemctl enable now reflector.service # run reflector on boot
-systemctl enable reflector.timer # set timer for run reflector
+systemctl enable reflector.timer # set timer to run reflector
+systemctl enable paccache.timer # set timer to clean cache
 
 cp /etc/pacman.conf /etc/pacman.conf.bak
 cp /etc/pacman.conf /etc/pacman.conf.temp

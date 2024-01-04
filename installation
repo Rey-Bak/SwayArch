@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PAC_MANS=( "yay" "paru" "pikkaur" )
-PM="yay"
+PM=yay
 
 # for MAN in "${PAC_MANS}"; do
 #     if ! command -v "${MAN}"; then
@@ -13,15 +13,16 @@ PM="yay"
 # done
 
 # Default and optinal programs 
-$PM -S wmenu foot polkit sddm
+$PM -S wmenu foot polkit ly # sddm
 
 $PM -S sway swaymsg swaybg swaylock swayidle swaync swayimg wl-clipboard #waybar
 # swaylock-effects swayfx swaytools swaystatus sway-contrib-git sway-input-config swaynagmode 
 
-$PM -S wl-clipboard-history wdisplays kanshi wlsunset wob waypipe flameshot
+$PM -S wl-clipboard-history wdisplays kanshi wlsunset wob waypipe 
 
 usermod -G seat
 systemctl enable seatd.service
-systemctl enable sddm.service
+systemctl enable ly
+systemctl disable getty@tty2.service
 
 systemctl reboot

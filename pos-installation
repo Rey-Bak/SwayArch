@@ -8,7 +8,6 @@ if ! uname -r ;then
 else
     echo "Linux lts already installed..."
 fi
-$PM -S linux-firmware
 
 # Compressors
 $PM -S unzip zip tar unrar p7zip p7zip-plugins rsync
@@ -23,12 +22,16 @@ $PM -S ttf-dejavu gnu-free-fonts ttf-liberation noto-fonts ttf-roboto \
     ttf-ubuntu-font-family ttf-fira-mono ttf-fira-code ttf-hack otf-hermit \
     ttc-iosevka ttf-iosevka-nerd ttf-jetbrains-mono ttf-meslo ttf-roboto-mono \
     adobe-source-code-pro-fonts ttf-fira-sans ttf-nunito adobe-source-sans-fonts \
-    ttf-iosevka-term
+    ttf-iosevka-term otf-font-awesome
+
+# System
+$PM -S linux-firmware pipewire pipewire-alsa pipewire-jack pipewire-audio 
+#noise-suppression-for-voice
 
 # Apps
 $PM -S powertop cups ufw obsidian fastfetch flameshot tmux neovim starship \
-    btop timeshift thunar librewolf-bin podman distrobox
-# gufw
+    btop timeshift thunar librewolf-bin podman distrobox conky
+#gufw
 
 powertop --auto-tune
 systemctl enable cups.service
